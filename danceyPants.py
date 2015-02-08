@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import cwiid, time, pygame, wiimote, pyglet
+import cwiid, time, pygame, wiimote
 from os import path
 from instrumentMap import instrumentMap
 
