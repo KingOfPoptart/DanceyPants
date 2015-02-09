@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import cwiid, time, pygame, wiimote
+import cwiid, time, pygame, wiimote 
 from os import path
 from instrumentMap import instrumentMap
 
@@ -7,6 +7,7 @@ button_delay = 0.1
 instruments = instrumentMap()
 
 wii = wiimote.connect()
+wii.led = 1
 wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
 
 pygame.mixer.init(frequency=22050, size=-16, channels=1, buffer=512)
@@ -22,8 +23,9 @@ i=0
 while(True):
   acc = wii.state['acc']
   buttons = wii.state['buttons']
+  
   #If moved suddenly
-  if(acc[0] < 50 | acc[1] > 175 | acc[2] > 175):
+  if(acc[0] < 50 | acc[1] > 175 | acc[2] > 175):  
     if (buttons & cwiid.BTN_A):
       soundChannelA.play(soundA)
     else:
@@ -35,7 +37,7 @@ while(True):
 
   
   # Detects if + and - are held down simultaneously and if they are it quits the program
-  if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):
+  elif (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):
     print '\nClosing connection ...'
     wii.rumble = 1
     time.sleep(1)
